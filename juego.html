@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    
+    <style>
+        .caja {
+            max-height: 25px;
+        }
+    </style>
+
+</head>
+
+<body>
+    
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <button id="marcador" class="btn btn-block btn-primary">
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star1"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star2"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star3"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star4"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star5"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star6"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star7"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star8"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star9"></i>
+                <i class="fa fa-star" style="font-size:28px; color:white;" id="star10"></i>
+            </button>
+            <button id="castellano" class="btn btn-block btn-secondary">español</button>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button id="btn1" class="btn btn-block btn-secondary">tiempo1</button>
+            </div>
+            <div class="col">
+                <button id="btn2" class="btn btn-block btn-secondary">tiempo2</button>
+            </div>
+            <div class="col">
+                <button id="btn3" class="btn btn-block btn-secondary">tiempo3</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button class="btn btn-block btn-dark" onclick="comprueba()" id="botonresultado">COMPROBAR</button>
+        </div>
+    </div>
+
+    <script src="js/listaVerbos.js"></script>
+    <script>
+        var nivel = window.location.hash.substring(1)
+        console.log(nivel)
+        var tiempoAAdivinar = 0;
+        var verboElegido = 0;
+        var jugando = 0;
+        var marcador = 0;
+
+        
+
+        function comprueba() {
+            if (jugando == 0) {
+                jugando = 1;
+                var verboLeido = document.getElementById('caja').value;
+                document.getElementById('botonresultado').classList.remove('btn-dark');
+                if (verbos[verboElegido][tiempoAAdivinar] == verboLeido) {
+                    //GANAR
+                    marcador++;
+                    document.getElementById('botonresultado').classList.add('btn-success');
+                    document.getElementById('botonresultado').innerText = "CORRECT";
+                } else {
+                    //PERDER
+                    marcador = 0;
+                    document.getElementById('botonresultado').classList.add('btn-danger');
+                    document.getElementById('botonresultado').innerText = verbos[verboElegido][tiempoAAdivinar];
+                }
+            } else {
+                jugando = 0;
+                eligeVerbo();
+                document.getElementById('botonresultado').classList.remove('btn-danger');
+                document.getElementById('botonresultado').classList.remove('btn-success');
+                document.getElementById('botonresultado').classList.add('btn-dark');
+                document.getElementById('botonresultado').innerText = "COMPROBAR";
+            }
+            marcadorLvl10(marcador);
+        }
+
+        function eligeVerbo() {
+            verboElegido = Math.floor(Math.random() * verbos.length);
+            tiempoAAdivinar = Math.floor(Math.random() * 3);
+            document.getElementById("castellano").innerHTML = verbos[verboElegido][3];
+
+            if (tiempoAAdivinar == 0) {
+                document.getElementById("btn1").innerHTML = "<input id='caja' class='form-control caja'>";
+            } else {
+                document.getElementById("btn1").innerHTML = verbos[verboElegido][0];
+            }
+
+            if (tiempoAAdivinar == 1) {
+                document.getElementById("btn2").innerHTML = "<input id='caja' class='form-control caja'>";
+            } else {
+                document.getElementById("btn2").innerHTML = verbos[verboElegido][1];
+            }
+
+            if (tiempoAAdivinar == 2) {
+                document.getElementById("btn3").innerHTML = "<input id='caja' class='form-control caja'>";
+            } else {
+                document.getElementById("btn3").innerHTML = verbos[verboElegido][2];
+            }
+            console.log(verbos[verboElegido][tiempoAAdivinar])
+        }
+
+        //TODO:
+        //Metodo para simplificar la puntuación, multiplicando o dividiendo a la hora de rellenar las
+        //estrellas
+        
+        function marcadorLvl10(_marcador){
+            if(_marcador == 1){
+                document.getElementById("star1").style.color = "yellow";
+            } else if(_marcador == 2){
+                document.getElementById("star2").style.color = "yellow";
+            } else if(_marcador == 3){
+                document.getElementById("star3").style.color = "yellow";
+            } else if(_marcador == 4){
+                document.getElementById("star4").style.color = "yellow";
+            } else if(_marcador == 5){
+                document.getElementById("star5").style.color = "yellow";
+            } else if(_marcador == 6){
+                document.getElementById("star6").style.color = "yellow";
+            } else if(_marcador == 7){
+                document.getElementById("star7").style.color = "yellow";
+            } else if(_marcador == 8){
+                document.getElementById("star8").style.color = "yellow";
+            } else if(_marcador == 9){
+                document.getElementById("star9").style.color = "yellow";
+            } else if(_marcador == 10){
+                document.getElementById("star10").style.color = "yellow";
+            } else{
+                document.getElementById("star1").style.color = "white";
+                document.getElementById("star2").style.color = "white";
+                document.getElementById("star3").style.color = "white";
+                document.getElementById("star4").style.color = "white";
+                document.getElementById("star5").style.color = "white";
+                document.getElementById("star6").style.color = "white";
+                document.getElementById("star7").style.color = "white";
+                document.getElementById("star8").style.color = "white";
+                document.getElementById("star9").style.color = "white";
+                document.getElementById("star10").style.color = "white";
+            }
+               
+        }
+
+        //no se porque he hecho esta mierda enorme
+        function marcadorYestrellas(_marcador){
+            switch(nivel){
+                case 10 : 
+                    
+
+                break;
+                case 20 : switch(_marcador){
+                    case 2: document.getElementById("star1").style.color = "yellow"; break;
+                    case 4: document.getElementById("star2").style.color = "yellow"; break;
+                    case 6: document.getElementById("star3").style.color = "yellow"; break;
+                    case 8: document.getElementById("star4").style.color = "yellow"; break;
+                    case 10: document.getElementById("star5").style.color = "yellow"; break;
+                    case 12: document.getElementById("star6").style.color = "yellow"; break;
+                    case 14: document.getElementById("star7").style.color = "yellow"; break;
+                    case 16: document.getElementById("star8").style.color = "yellow"; break;
+                    case 18: document.getElementById("star9").style.color = "yellow"; break;
+                    case 20: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break; 
+                } break;
+                case 30 : switch(_marcador){
+                    case 3: document.getElementById("star1").style.color = "yellow"; break;
+                    case 6: document.getElementById("star2").style.color = "yellow"; break;
+                    case 9: document.getElementById("star3").style.color = "yellow"; break;
+                    case 12: document.getElementById("star4").style.color = "yellow"; break;
+                    case 15: document.getElementById("star5").style.color = "yellow"; break;
+                    case 18: document.getElementById("star6").style.color = "yellow"; break;
+                    case 21: document.getElementById("star7").style.color = "yellow"; break;
+                    case 24: document.getElementById("star8").style.color = "yellow"; break;
+                    case 27: document.getElementById("star9").style.color = "yellow"; break;
+                    case 30: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break; 
+                } break;
+                case 40 : switch(_marcador){
+                    case 4: document.getElementById("star1").style.color = "yellow"; break;
+                    case 8: document.getElementById("star2").style.color = "yellow"; break;
+                    case 12: document.getElementById("star3").style.color = "yellow"; break;
+                    case 16: document.getElementById("star4").style.color = "yellow"; break;
+                    case 20: document.getElementById("star5").style.color = "yellow"; break;
+                    case 24: document.getElementById("star6").style.color = "yellow"; break;
+                    case 28: document.getElementById("star7").style.color = "yellow"; break;
+                    case 32: document.getElementById("star8").style.color = "yellow"; break;
+                    case 36: document.getElementById("star9").style.color = "yellow"; break;
+                    case 40: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break; 
+                } break;
+                case 50 :  switch(_marcador){
+                    case 5: document.getElementById("star1").style.color = "yellow"; break;
+                    case 10: document.getElementById("star2").style.color = "yellow"; break;
+                    case 15: document.getElementById("star3").style.color = "yellow"; break;
+                    case 20: document.getElementById("star4").style.color = "yellow"; break;
+                    case 25: document.getElementById("star5").style.color = "yellow"; break;
+                    case 30: document.getElementById("star6").style.color = "yellow"; break;
+                    case 35: document.getElementById("star7").style.color = "yellow"; break;
+                    case 40: document.getElementById("star8").style.color = "yellow"; break;
+                    case 45: document.getElementById("star9").style.color = "yellow"; break;
+                    case 50: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break;
+                } break;
+                case 60 :  switch(_marcador){
+                    case 6: document.getElementById("star1").style.color = "yellow"; break;
+                    case 12: document.getElementById("star2").style.color = "yellow"; break;
+                    case 18: document.getElementById("star3").style.color = "yellow"; break;
+                    case 24: document.getElementById("star4").style.color = "yellow"; break;
+                    case 30: document.getElementById("star5").style.color = "yellow"; break;
+                    case 36: document.getElementById("star6").style.color = "yellow"; break;
+                    case 42: document.getElementById("star7").style.color = "yellow"; break;
+                    case 48: document.getElementById("star8").style.color = "yellow"; break;
+                    case 54: document.getElementById("star9").style.color = "yellow"; break;
+                    case 60: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break;
+                } break;
+                case 70 :  switch(_marcador){
+                    case 7: document.getElementById("star1").style.color = "yellow"; break;
+                    case 14: document.getElementById("star2").style.color = "yellow"; break;
+                    case 21: document.getElementById("star3").style.color = "yellow"; break;
+                    case 28: document.getElementById("star4").style.color = "yellow"; break;
+                    case 35: document.getElementById("star5").style.color = "yellow"; break;
+                    case 42: document.getElementById("star6").style.color = "yellow"; break;
+                    case 49: document.getElementById("star7").style.color = "yellow"; break;
+                    case 56: document.getElementById("star8").style.color = "yellow"; break;
+                    case 63: document.getElementById("star9").style.color = "yellow"; break;
+                    case 70: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break;
+                } break;
+                case 80 :  switch(_marcador){
+                    case 8: document.getElementById("star1").style.color = "yellow"; break;
+                    case 16: document.getElementById("star2").style.color = "yellow"; break;
+                    case 24: document.getElementById("star3").style.color = "yellow"; break;
+                    case 32: document.getElementById("star4").style.color = "yellow"; break;
+                    case 40: document.getElementById("star5").style.color = "yellow"; break;
+                    case 48: document.getElementById("star6").style.color = "yellow"; break;
+                    case 56: document.getElementById("star7").style.color = "yellow"; break;
+                    case 64: document.getElementById("star8").style.color = "yellow"; break;
+                    case 72: document.getElementById("star9").style.color = "yellow"; break;
+                    case 80: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break;
+                } break;
+                case 140 :  switch(_marcador){
+                    case 14: document.getElementById("star1").style.color = "yellow"; break;
+                    case 28: document.getElementById("star2").style.color = "yellow"; break;
+                    case 42: document.getElementById("star3").style.color = "yellow"; break;
+                    case 56: document.getElementById("star4").style.color = "yellow"; break;
+                    case 70: document.getElementById("star5").style.color = "yellow"; break;
+                    case 84: document.getElementById("star6").style.color = "yellow"; break;
+                    case 98: document.getElementById("star7").style.color = "yellow"; break;
+                    case 112: document.getElementById("star8").style.color = "yellow"; break;
+                    case 126: document.getElementById("star9").style.color = "yellow"; break;
+                    case 140: document.getElementById("star10").style.color = "yellow"; break;
+                    case 0: document.getElementById("star1").style.color = "white";
+                             document.getElementById("star2").style.color = "white";
+                             document.getElementById("star3").style.color = "white";
+                             document.getElementById("star4").style.color = "white";
+                             document.getElementById("star5").style.color = "white";
+                             document.getElementById("star6").style.color = "white";
+                             document.getElementById("star7").style.color = "white";
+                             document.getElementById("star8").style.color = "white";
+                             document.getElementById("star9").style.color = "white";
+                             document.getElementById("star10").style.color = "white";
+                    break;
+                } break;
+            }
+        }
+
+        eligeVerbo();
+    </script>
+</body>
+
+</html>

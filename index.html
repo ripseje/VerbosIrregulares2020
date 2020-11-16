@@ -1,105 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verbos Irregulares</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         crossorigin="anonymous">
     <style>
-        .caja {
-            max-height: 25px;
+        .flag{
+            width: 20px;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="row">
-            <button id="marcador" class="btn btn-block btn-primary">0</button>
-            <button id="castellano" class="btn btn-block btn-secondary">español</button>
+            <button class="btn btn-block btn-dark">
+                <img class="flag" src="https://images.vexels.com/media/users/3/163965/isolated/lists/5bb2c926d53cc59030477ec3ecb6d26a-icono-de-idioma-de-la-bandera-de-inglaterra.png">
+                    Verbos Irregulares 
+                <img class="flag" src="https://images.vexels.com/media/users/3/163965/isolated/lists/5bb2c926d53cc59030477ec3ecb6d26a-icono-de-idioma-de-la-bandera-de-inglaterra.png">
+            </button>
         </div>
         <br>
         <div class="row">
-            <div class="col">
-                <button id="btn1" class="btn btn-block btn-secondary">tiempo1</button>
-            </div>
-            <div class="col">
-                <button id="btn2" class="btn btn-block btn-secondary">tiempo2</button>
-            </div>
-            <div class="col">
-                <button id="btn3" class="btn btn-block btn-secondary">tiempo3</button>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <button class="btn btn-block btn-dark" onclick="comprueba()" id="botonresultado">COMPROBAR</button>
+            <div class="col"></div>
+            <div class="col"><button class="btn btn-block btn-primary">Elige el nivel</button></div>
+            <div class="col"></div>
         </div>
     </div>
-
-    <script src="js/listaVerbos.js"></script>
+    <hr>
+    <br>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(10)">10</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(20)">20</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(30)">30</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(40)">40</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(50)">50</button></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(60)">60</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(70)">70</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(80)">80</button></div>
+                <div class="col-2"><button class="btn btn-primary" onclick="cambiaPagina(140)">140</button></div>
+            </div>
+        </div>
+    </div>
     <script>
 
-        var tiempoAAdivinar = 0;
-        var verboElegido = 0;
-        var jugando = 0;
-        var marcador = 0;
-
-        function comprueba() {
-            if (jugando == 0) {
-                jugando = 1;
-                var verboLeido = document.getElementById('caja').value;
-                document.getElementById('botonresultado').classList.remove('btn-dark');
-                if (verbos[verboElegido][tiempoAAdivinar] == verboLeido) {
-                    //GANAR
-                    marcador++;
-                    document.getElementById('botonresultado').classList.add('btn-success');
-                    document.getElementById('botonresultado').innerText = "CORRECT";
-                } else {
-                    //PERDER
-                    marcador = 0;
-                    document.getElementById('botonresultado').classList.add('btn-danger');
-                    document.getElementById('botonresultado').innerText = verbos[verboElegido][tiempoAAdivinar];
-                }
-            } else {
-                jugando = 0;
-                eligeVerbo();
-                document.getElementById('botonresultado').classList.remove('btn-danger');
-                document.getElementById('botonresultado').classList.remove('btn-success');
-                document.getElementById('botonresultado').classList.add('btn-dark');
-                document.getElementById('botonresultado').innerText = "COMPROBAR";
-            }
-            document.getElementById('marcador').innerText = marcador;
+        function cambiaPagina(cantidadPreguntas){
+            window.location.href = "juego.html" + "#" + cantidadPreguntas
         }
 
-        function eligeVerbo() {
-            verboElegido = Math.floor(Math.random() * verbos.length);
-            tiempoAAdivinar = Math.floor(Math.random() * 3);
-            document.getElementById("castellano").innerHTML = verbos[verboElegido][3];
-
-            if (tiempoAAdivinar == 0) {
-                document.getElementById("btn1").innerHTML = "<input id='caja' class='form-control caja'>";
-            } else {
-                document.getElementById("btn1").innerHTML = verbos[verboElegido][0];
-            }
-
-            if (tiempoAAdivinar == 1) {
-                document.getElementById("btn2").innerHTML = "<input id='caja' class='form-control caja'>";
-            } else {
-                document.getElementById("btn2").innerHTML = verbos[verboElegido][1];
-            }
-
-            if (tiempoAAdivinar == 2) {
-                document.getElementById("btn3").innerHTML = "<input id='caja' class='form-control caja'>";
-            } else {
-                document.getElementById("btn3").innerHTML = verbos[verboElegido][2];
-            }
-
-        }
-
-        eligeVerbo();
     </script>
 </body>
-
 </html>
