@@ -52,10 +52,36 @@ var nivel = window.location.hash.substring(1)
         }
 
 
-        //En esta función elegimos el verbo que va a salir por pantalla y sus "aditivos"
+        //En esta función elegimos el verbo que va a salir por pantalla(dependiendo del nivel que sea van a salir  más o menos verbos)
         function eligeVerbo() {
-            verboElegido = Math.floor(Math.random() * verbos.length);
-            tiempoAAdivinar = Math.floor(Math.random() * 3);
+            if(nivel == 10){
+                verboElegido = Math.floor(Math.random() * 10);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 20){
+                verboElegido = Math.floor(Math.random() * 20);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 30){
+                verboElegido = Math.floor(Math.random() * 30);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 40){
+                verboElegido = Math.floor(Math.random() * 40);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 50){
+                verboElegido = Math.floor(Math.random() * 50);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 60){
+                verboElegido = Math.floor(Math.random() * 60);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 70){
+                verboElegido = Math.floor(Math.random() * 70);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 80){
+                verboElegido = Math.floor(Math.random() * 80);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            } else if(nivel == 140){
+                verboElegido = Math.floor(Math.random() * 140);
+                tiempoAAdivinar = Math.floor(Math.random() * 3);
+            }
             document.getElementById("castellano").innerHTML = verbos[verboElegido][3];
 
             if (tiempoAAdivinar == 0) {
@@ -78,105 +104,71 @@ var nivel = window.location.hash.substring(1)
             console.log(verbos[verboElegido][tiempoAAdivinar])
         }
 
-
-        //Esta función crea y devuelve una serie de arrays con las diferentes puntuaciones que necesitamos para
-        //sacar una estrella(etc) en cada nivel(más puntos por estrella en cada nivel)
-        function creaArray(){
-            if(nivel == 10){
-                return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-            } else if(nivel == 20){
-                return [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-
-            } else if(nivel == 30){
-                return [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
-
-            } else if(nivel == 40){
-                return [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
-
-            } else if(nivel == 50){
-                return [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
-
-            } else if(nivel == 60){
-                return [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60]
-
-            } else if(nivel == 70){
-                return [0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
-
-            } else if(nivel == 80){
-                return [0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
-
-            } else if(nivel == 140){
-                return [0, 14, 28, 42, 56, 70, 84, 98, 112, 126, 140]
-            }
-        }
-
         //Esta función usa los arrays anteriores dependiendo del nivel para saber cuando hay
         //que pintar una estrella 
         //Si marcador pasa a ser 0 se vuelven todas las estrellas blancas
         function marcadorEstrellas(_marcador){
-            var array = creaArray();
-            if(_marcador == array[1]){
+            if(_marcador == 5){
                 if(nivel == 140){
                     document.getElementById("star1").style.color = "black";
                 } else {
                     document.getElementById("star1").style.color = "yellow";
                 }
-            } else if(_marcador == array[2]){
+            } else if(_marcador == 10){
                 if(nivel == 140){
                     document.getElementById("star2").style.color = "black";
                 } else {
                     document.getElementById("star2").style.color = "yellow";
                 }
-            } else if(_marcador == array[3]){
+            } else if(_marcador == 15){
                 if(nivel == 140){
                     document.getElementById("star3").style.color = "black";
                 } else{
                     document.getElementById("star3").style.color = "yellow";
                 }
-            } else if(_marcador == array[4]){
+            } else if(_marcador == 20){
                 if(nivel == 140){
                     document.getElementById("star4").style.color = "black";
                 } else {
                     document.getElementById("star4").style.color = "yellow";
                 }
-            } else if(_marcador == array[5]){
+            } else if(_marcador == 25){
                 if(nivel == 140){
                     document.getElementById("star5").style.color = "black";
                 } else {
                     document.getElementById("star5").style.color = "yellow";
                 }
-            } else if(_marcador == array[6]){
+            } else if(_marcador == 30){
                 if(nivel == 140){
                     document.getElementById("star6").style.color = "black";
                 } else {
                     document.getElementById("star6").style.color = "yellow";
                 }
-            } else if(_marcador == array[7]){
+            } else if(_marcador == 35){
                 if(nivel == 140){
                     document.getElementById("star7").style.color = "black";
                 } else {
                     document.getElementById("star7").style.color = "yellow";
                 }
-            } else if(_marcador == array[8]){
+            } else if(_marcador == 40){
                 if(nivel == 140){
                     document.getElementById("star8").style.color = "black";
                 } else {
                     document.getElementById("star8").style.color = "yellow";
                 }
-            } else if(_marcador == array[9]){
+            } else if(_marcador == 45){
                 if(nivel == 140){
                     document.getElementById("star9").style.color = "black";
                 } else {
                     document.getElementById("star9").style.color = "yellow";
                 }
-            } else if(_marcador == array[10]){
+            } else if(_marcador == 50){
                 if(nivel == 140){
                     document.getElementById("star10").style.color = "black";
                 } else {
                     document.getElementById("star10").style.color = "yellow";
                 }
-            } else if(_marcador == array[0]){
+            } else if(_marcador == 0){
                 document.getElementById("star1").style.color = "white";
                 document.getElementById("star2").style.color = "white";
                 document.getElementById("star3").style.color = "white";
@@ -194,9 +186,9 @@ var nivel = window.location.hash.substring(1)
         //Esta función sirve para contar los puntos que faltan para un trofeo y actualiza los trofeos que tenemos
         //Al conseguir un nuevo trofeo todos los iconos se ponen en blanco
         function cuantosPuntos(marcador){
-            document.getElementById("contadorSpan").innerText = (nivel-marcador) + " Points Left to Get a TROPHY";
+            document.getElementById("contadorSpan").innerText = (50-marcador) + " Points Left to Get a TROPHY";
             
-            if(nivel-marcador == 0){
+            if(50-marcador == 0){
                 if(trofeos == 0){
                     document.getElementById("trofeos").innerHTML = '<i class="fa fa-trophy" style="font-size:28px; color:yellow;"></i> '
 
